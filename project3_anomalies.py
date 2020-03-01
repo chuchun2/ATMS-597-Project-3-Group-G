@@ -9,7 +9,7 @@ Original file is located at
 # Install and import packages
 """
 
-#installs python packages needed
+# installs python packages needed
 !pip install pydap
 !pip install netcdf4
 !apt-get -qq install libproj-dev proj-data proj-bin libgeos-dev
@@ -34,21 +34,21 @@ import cartopy.util as cutil
 """# Calculate and plot the long term mean"""
 
 # loading the long term mean data
-uwnd=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/uwnd.mon.1981-2010.ltm.nc', engine='netcdf4')
-vwnd=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/vwnd.mon.1981-2010.ltm.nc', engine='netcdf4')
-hgt=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/hgt.mon.1981-2010.ltm.nc', engine='netcdf4')
-air=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/air.mon.1981-2010.ltm.nc', engine='netcdf4')
-shum=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/shum.mon.1981-2010.ltm.nc', engine='netcdf4')
-skt=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface_gauss/skt.sfc.mon.1981-2010.ltm.nc', engine='netcdf4')
-uwnd_sig995=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/uwnd.sig995.mon.1981-2010.ltm.nc', engine='netcdf4')
-vwnd_sig995=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/vwnd.sig995.mon.1981-2010.ltm.nc', engine='netcdf4')
-pr_wtr=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/pr_wtr.eatm.mon.1981-2010.ltm.nc', engine='netcdf4')
-prate=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface_gauss/prate.sfc.mon.ltm.nc', engine='netcdf4')
-omega=xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/omega.mon.1981-2010.ltm.nc', engine='netcdf4')
+uwnd = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/uwnd.mon.1981-2010.ltm.nc', engine='netcdf4')
+vwnd = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/vwnd.mon.1981-2010.ltm.nc', engine='netcdf4')
+hgt = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/hgt.mon.1981-2010.ltm.nc', engine='netcdf4')
+air = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/air.mon.1981-2010.ltm.nc', engine='netcdf4')
+shum = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/shum.mon.1981-2010.ltm.nc', engine='netcdf4')
+skt = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface_gauss/skt.sfc.mon.1981-2010.ltm.nc', engine='netcdf4')
+uwnd_sig995 = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/uwnd.sig995.mon.1981-2010.ltm.nc', engine='netcdf4')
+vwnd_sig995 = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/vwnd.sig995.mon.1981-2010.ltm.nc', engine='netcdf4')
+pr_wtr = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/pr_wtr.eatm.mon.1981-2010.ltm.nc', engine='netcdf4')
+prate = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface_gauss/prate.sfc.mon.ltm.nc', engine='netcdf4')
+omega = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/omega.mon.1981-2010.ltm.nc', engine='netcdf4')
 
 xr.Dataset.info(uwnd)
 
-skt.isel(time=[9,10,11])
+skt.isel(time=[9, 10, 11])
 
 # Figure 1. 250 hPa wind vectors and wind speed
 # (1981-2010 OND long term mean)
@@ -57,31 +57,31 @@ x = uwnd.lon
 y = uwnd.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Caculate wind speed
-u = uwnd['uwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time')
-v = vwnd['vwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time')
+u = uwnd['uwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time')
+v = vwnd['vwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time')
 wspd_uv = sqrt(u**2+v**2)
 
 # Plot wind speed as filled contours
 data = wspd_uv
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('250 hPa wind speed (m/s)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4  # change the density of quiver plot
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         uwnd['uwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides],
-         vwnd['vwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              uwnd['uwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides],
+              vwnd['vwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 20, r'$20\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('250 hPa wind vectors and wind speed (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('250 hPa wind vectors and wind speed (1981-2010 OND long term mean)', fontsize=14)
 
 plt.show()
 fig.savefig("figure1.png", dpi=300)
@@ -93,26 +93,26 @@ x = hgt.lon
 y = hgt.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot geopotential height as filled contours
-data = hgt['hgt'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = hgt['hgt'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('500 hPa geopotential height (m)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         uwnd['uwnd'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides],
-         vwnd['vwnd'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              uwnd['uwnd'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides],
+              vwnd['vwnd'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 10, r'$10\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('500 hPa wind vectors and geopotential height (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('500 hPa wind vectors and geopotential height (1981-2010 OND long term mean)', fontsize=14)
 
 plt.show()
 fig.savefig("figure2.png", dpi=300)
@@ -124,24 +124,24 @@ x = air.lon
 y = air.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot temperature as filled contours
-data = air['air'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = air['air'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.005, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot specific humidity as contours
-data = shum['shum'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
+data = shum['shum'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
 # Option 1: plot colorbar for contour
-cs = ax.contour(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds');
+cs = ax.contour(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa specific humidity (g/kg)', size=12, rotation=-90, verticalalignment='bottom')
@@ -151,11 +151,11 @@ label = out.set_label('850 hPa specific humidity (g/kg)', size=12, rotation=-90,
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         uwnd['uwnd'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides],
-         vwnd['vwnd'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              uwnd['uwnd'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides],
+              vwnd['vwnd'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.63, 0.83, 5, r'$5\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('850 hPa temperature, specific humidity, and winds (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('850 hPa temperature, specific humidity, and winds (1981-2010 OND long term mean)', fontsize=14)
 
 plt.show()
 fig.savefig("figure3.png", dpi=300)
@@ -168,17 +168,17 @@ x = skt.lon
 y = skt.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot skin temperature as filled contours
-data = skt['skt'].isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = skt['skt'].isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('skin temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
@@ -186,11 +186,11 @@ ax.coastlines()
 x = uwnd_sig995.lon
 y = uwnd_sig995.lat
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         uwnd_sig995['uwnd'].isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides],
-         vwnd_sig995['vwnd'].isel(time=[9,10,11]).mean(dim='time').values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              uwnd_sig995['uwnd'].isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides],
+              vwnd_sig995['vwnd'].isel(time=[9, 10, 11]).mean(dim='time').values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 5, r'$5\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('skin temperature, and surface wind vectors (sig995 level) (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('skin temperature, and surface wind vectors (sig995 level) (1981-2010 OND long term mean)', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -203,19 +203,19 @@ x = pr_wtr.lon
 y = pr_wtr.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-data = pr_wtr['pr_wtr'].isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = pr_wtr['pr_wtr'].isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('total atmospheric column water vapor (kg/$m^2$)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('total atmospheric column water vapor (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('total atmospheric column water vapor (1981-2010 OND long term mean)', fontsize=14)
 
 plt.show()
 fig.savefig("figure5.png", dpi=300)
@@ -227,19 +227,19 @@ x = prate.lon
 y = prate.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-data = prate['prate'].isel(time=[9,10,11]).mean(dim='time')*86400 # kg/m^2/s to mm/day
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(0, 17), transform=ccrs.PlateCarree());
+data = prate['prate'].isel(time=[9, 10, 11]).mean(dim='time') * 86400  # kg/m^2/s to mm/day
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(0, 17), transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('precipitation rate (mm/day)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('precipitation rate (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('precipitation rate (1981-2010 OND long term mean)', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -252,19 +252,19 @@ x = omega.lon
 y = omega.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-data = omega['omega'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), cmap='coolwarm');
+data = omega['omega'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('omega (Pa/s)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('500 hPa omega (1981-2010 OND long term mean)', fontsize=14);
+ax.set_title('500 hPa omega (1981-2010 OND long term mean)', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -272,7 +272,7 @@ fig.savefig("figure7.png", dpi=300)
 
 """# Calculate extreme precipitation day composite"""
 
-dates_95 = xr.open_dataset('datesexceeded.nc') # extreme precipitation date
+dates_95 = xr.open_dataset('datesexceeded.nc')  # extreme precipitation date
 
 dates = pd.to_datetime(dates_95.time.values)
 dates
@@ -281,52 +281,50 @@ iyr = 1996
 dates_yr = dates[where(dates.year == iyr)]
 dates_yr
 
-# Commented out IPython magic to ensure Python compatibility.
-# %%time
-# # loading the daily data for extreme precip dates
-# years = pd.date_range(start='1996-01-01', end='2019-12-01', freq='AS')
-# varname = ['uwnd','vwnd','hgt','air','shum','skt','uwnd_sig995','vwnd_sig995','pr_wtr','prate','omega']
-# 
-# data_list = {}
-# for ivar in varname:
-#   data_list[ivar] = []
-# 
-# for iyr in years.year:
-#   print('working on '+str(iyr))
-#   # extreme precip dates for this year
-#   dates_yr = dates[where(dates.year == iyr)]
-#   print('how many extreme dates?', dates_yr.size)
-#   # collect data except for wspd, which is not available in daily dataset
-#   data_sel = {}
-#   data_sel['uwnd'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/uwnd.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['vwnd'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/vwnd.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['hgt'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/hgt.'+str(iyr)+'.nc', engine='netcdf4').sel(level=500, time=dates_yr)
-#   data_sel['air'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/air.'+str(iyr)+'.nc', engine='netcdf4').sel(level=850, time=dates_yr)
-#   data_sel['shum'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/shum.'+str(iyr)+'.nc', engine='netcdf4').sel(level=850, time=dates_yr)
-#   data_sel['skt'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface_gauss/skt.sfc.gauss.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['uwnd_sig995'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/uwnd.sig995.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['vwnd_sig995'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/vwnd.sig995.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['pr_wtr'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/pr_wtr.eatm.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['prate'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface_gauss/prate.sfc.gauss.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
-#   data_sel['omega'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/omega.'+str(iyr)+'.nc', engine='netcdf4').sel(level=500, time=dates_yr)
-#   for ivar in varname:
-#     data_list[ivar].append(data_sel[ivar])
-# 
-# # concatenate the data and calculate the time average
-# print('concatenate the data and calculate the time average')
-# extremes_tavg = {}
-# for ivar in varname:
-#   extremes_tavg[ivar] = xr.concat(data_list[ivar], dim='time').mean(dim='time')
+# loading the daily data for extreme precip dates
+years = pd.date_range(start='1996-01-01', end='2019-12-01', freq='AS')
+varname = ['uwnd', 'vwnd', 'hgt', 'air', 'shum', 'skt', 'uwnd_sig995', 'vwnd_sig995', 'pr_wtr', 'prate', 'omega']
 
-# save the extreme precipitation day composite 
+data_list = {}
 for ivar in varname:
-  filename = 'extremes_tavg_' + ivar
-  extremes_tavg[ivar].to_netcdf('./' + filename)
+    data_list[ivar] = []
+
+for iyr in years.year:
+    print('working on '+str(iyr))
+    # extreme precip dates for this year
+    dates_yr = dates[where(dates.year == iyr)]
+    print('how many extreme dates?', dates_yr.size)
+    # collect data except for wspd, which is not available in daily dataset
+    data_sel = {}
+    data_sel['uwnd'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/uwnd.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['vwnd'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/vwnd.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['hgt'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/hgt.'+str(iyr)+'.nc', engine='netcdf4').sel(level=500, time=dates_yr)
+    data_sel['air'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/air.'+str(iyr)+'.nc', engine='netcdf4').sel(level=850, time=dates_yr)
+    data_sel['shum'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/shum.'+str(iyr)+'.nc', engine='netcdf4').sel(level=850, time=dates_yr)
+    data_sel['skt'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface_gauss/skt.sfc.gauss.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['uwnd_sig995'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/uwnd.sig995.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['vwnd_sig995'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/vwnd.sig995.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['pr_wtr'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface/pr_wtr.eatm.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['prate'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/surface_gauss/prate.sfc.gauss.'+str(iyr)+'.nc', engine='netcdf4').sel(time=dates_yr)
+    data_sel['omega'] = xr.open_dataset('https://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/omega.'+str(iyr)+'.nc', engine='netcdf4').sel(level=500, time=dates_yr)
+    for ivar in varname:
+        data_list[ivar].append(data_sel[ivar])
+
+# concatenate the data and calculate the time average
+print('concatenate the data and calculate the time average')
+extremes_tavg = {}
+for ivar in varname:
+    extremes_tavg[ivar] = xr.concat(data_list[ivar], dim='time').mean(dim='time')
+
+# save the extreme precipitation day composite
+for ivar in varname:
+    filename = 'extremes_tavg_' + ivar
+    extremes_tavg[ivar].to_netcdf('./' + filename)
 
 # # we can use the saved data instead of generating the data again
 # extremes_tavg = {}
 # for ivar in varname:
-#   extremes_tavg[ivar] = xr.open_dataset('./extremes_tavg_'+ivar)
+#     extremes_tavg[ivar] = xr.open_dataset('./extremes_tavg_'+ivar)
 
 extremes_tavg['air']
 
@@ -339,18 +337,18 @@ x = extremes_tavg['uwnd'].lon
 y = extremes_tavg['uwnd'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Caculate wind speed
 u = extremes_tavg['uwnd'].sel(level=250.)
 v = extremes_tavg['vwnd'].sel(level=250.)
-wspd_uv = sqrt(u['uwnd']**2+v['vwnd']**2)
+wspd_uv = sqrt(u['uwnd']**2 + v['vwnd']**2)
 
 # Plot wind speed as filled contours
 data = wspd_uv
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('250 hPa wind speed (m/s)', size=12, rotation=-90, verticalalignment='bottom')
@@ -359,11 +357,11 @@ ax.coastlines()
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4  # change the density of quiver plot
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         u['uwnd'][::quiver_strides,::quiver_strides],
-         v['vwnd'][::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              u['uwnd'][::quiver_strides, ::quiver_strides],
+              v['vwnd'][::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 20, r'$20\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('250 hPa wind vectors and wind speed (extreme precipitation day composite)', fontsize=14);
+ax.set_title('250 hPa wind vectors and wind speed (extreme precipitation day composite)', fontsize=14)
 
 plt.show()
 fig.savefig("figure8.png", dpi=300)
@@ -375,26 +373,26 @@ x = extremes_tavg['hgt'].lon
 y = extremes_tavg['hgt'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot geopotential height as filled contours
 data = extremes_tavg['hgt']['hgt']
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('500 hPa geopotential height (m)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         extremes_tavg['uwnd'].sel(level=500.)['uwnd'][::quiver_strides,::quiver_strides],
-         extremes_tavg['vwnd'].sel(level=500.)['vwnd'][::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              extremes_tavg['uwnd'].sel(level=500.)['uwnd'][::quiver_strides, ::quiver_strides],
+              extremes_tavg['vwnd'].sel(level=500.)['vwnd'][::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 10, r'$10\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('500 hPa wind vectors and geopotential height (extreme precipitation day composite)', fontsize=14);
+ax.set_title('500 hPa wind vectors and geopotential height (extreme precipitation day composite)', fontsize=14)
 
 plt.show()
 fig.savefig("figure9.png", dpi=300)
@@ -406,38 +404,38 @@ x = extremes_tavg['air'].lon
 y = extremes_tavg['air'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot temperature as filled contours
-data = extremes_tavg['air']['air'] - 273.15 # K to degC
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = extremes_tavg['air']['air'] - 273.15  # K to degC
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.005, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot specific humidity as contours
-data = extremes_tavg['shum']['shum'] * 1000 # kg/kg to g/kg
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
+data = extremes_tavg['shum']['shum'] * 1000  # kg/kg to g/kg
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
 # Option 1: plot colorbar for contour
-cs = ax.contour(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds');
+cs = ax.contour(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa specific humidity (g/kg)', size=12, rotation=-90, verticalalignment='bottom')
 # Option 2: label the number on the contour
-# cs = ax.contour(x, y, data, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds');
+# cs = ax.contour(x, y, data, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds')
 # ax.clabel(cs, inline=1, fmt='%2.1f', fontsize=14)
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         extremes_tavg['uwnd'].sel(level=850.)['uwnd'][::quiver_strides,::quiver_strides],
-         extremes_tavg['vwnd'].sel(level=850.)['vwnd'][::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              extremes_tavg['uwnd'].sel(level=850.)['uwnd'][::quiver_strides, ::quiver_strides],
+              extremes_tavg['vwnd'].sel(level=850.)['vwnd'][::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.63, 0.83, 5, r'$5\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('850 hPa temperature, specific humidity, and winds (extreme precipitation day composite)', fontsize=14);
+ax.set_title('850 hPa temperature, specific humidity, and winds (extreme precipitation day composite)', fontsize=14)
 
 plt.show()
 fig.savefig("figure10.png", dpi=300)
@@ -450,17 +448,17 @@ x = extremes_tavg['skt'].lon
 y = extremes_tavg['skt'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot skin temperature as filled contours
-data = extremes_tavg['skt']['skt'] - 273.15 # K to degC
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data = extremes_tavg['skt']['skt'] - 273.15  # K to degC
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('skin temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
@@ -468,11 +466,11 @@ ax.coastlines()
 x = extremes_tavg['uwnd_sig995'].lon
 y = extremes_tavg['uwnd_sig995'].lat
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         extremes_tavg['uwnd_sig995']['uwnd'][::quiver_strides,::quiver_strides],
-         extremes_tavg['vwnd_sig995']['vwnd'][::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              extremes_tavg['uwnd_sig995']['uwnd'][::quiver_strides, ::quiver_strides],
+              extremes_tavg['vwnd_sig995']['vwnd'][::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 5, r'$5\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('skin temperature, and surface wind vectors (sig995 level) (extreme precipitation day composite)', fontsize=14);
+ax.set_title('skin temperature, and surface wind vectors (sig995 level) (extreme precipitation day composite)', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -485,19 +483,19 @@ x = extremes_tavg['pr_wtr'].lon
 y = extremes_tavg['pr_wtr'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
 data = extremes_tavg['pr_wtr']['pr_wtr']
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree());
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('total atmospheric column water vapor (kg/$m^2$)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('total atmospheric column water vapor (extreme precipitation day composite)', fontsize=14);
+ax.set_title('total atmospheric column water vapor (extreme precipitation day composite)', fontsize=14)
 
 plt.show()
 fig.savefig("figure12.png", dpi=300)
@@ -509,19 +507,19 @@ x = extremes_tavg['prate'].lon
 y = extremes_tavg['prate'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-data = extremes_tavg['prate']['prate']*86400 # kg/m^2/s to mm/day
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(0, 17), transform=ccrs.PlateCarree());
+data = extremes_tavg['prate']['prate'] * 86400  # kg/m^2/s to mm/day
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(0, 17), transform=ccrs.PlateCarree())
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('precipitation rate (mm/day)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('precipitation rate (extreme precipitation day composite)', fontsize=14);
+ax.set_title('precipitation rate (extreme precipitation day composite)', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -534,19 +532,19 @@ x = extremes_tavg['omega'].lon
 y = extremes_tavg['omega'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
 data = extremes_tavg['omega']['omega']
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), cmap='coolwarm');
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('omega (Pa/s)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('500 hPa omega (extreme precipitation day composite)', fontsize=14);
+ax.set_title('500 hPa omega (extreme precipitation day composite)', fontsize=14)
 
 plt.show()
 fig.savefig("figure14.png", dpi=300)
@@ -560,12 +558,12 @@ x = uwnd.lon
 y = uwnd.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot wind speed as filled contours
-u = uwnd['uwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time')
-v = vwnd['vwnd'].sel(level=250.).isel(time=[9,10,11]).mean(dim='time')
+u = uwnd['uwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time')
+v = vwnd['vwnd'].sel(level=250.).isel(time=[9, 10, 11]).mean(dim='time')
 wspd_uv = sqrt(u**2+v**2)
 u_ext = extremes_tavg['uwnd'].sel(level=250.)
 v_ext = extremes_tavg['vwnd'].sel(level=250.)
@@ -576,20 +574,20 @@ wspd_uv_diff = wspd_uv_ext - wspd_uv
 
 data = wspd_uv_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4,5,1), transform=ccrs.PlateCarree(), cmap='coolwarm');
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4, 5, 1), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('250 hPa wind speed (m/s)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         u_diff.values[::quiver_strides,::quiver_strides],
-         v_diff.values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              u_diff.values[::quiver_strides, ::quiver_strides],
+              v_diff.values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 2, r'$2\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('250 hPa wind vectors and wind speed anomalies', fontsize=14);
+ax.set_title('250 hPa wind vectors and wind speed anomalies', fontsize=14)
 
 plt.show()
 fig.savefig("figure15.png", dpi=300)
@@ -601,37 +599,37 @@ x = hgt.lon
 y = hgt.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot geopotential height as filled contours
-hgt_ltm = hgt['hgt'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
+hgt_ltm = hgt['hgt'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
 hgt_ext = extremes_tavg['hgt']
 hgt_diff = hgt_ext['hgt'] - hgt_ltm
 
 data = hgt_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-50, 51, 10), transform=ccrs.PlateCarree(), cmap='coolwarm');
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-50, 51, 10), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('500 hPa geopotential height (m)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
-u = uwnd['uwnd'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
-v = vwnd['vwnd'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
+u = uwnd['uwnd'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
+v = vwnd['vwnd'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
 u_ext = extremes_tavg['uwnd'].sel(level=500.)
 v_ext = extremes_tavg['vwnd'].sel(level=500.)
 u_diff = u_ext['uwnd'] - u
 v_diff = v_ext['vwnd'] - v
 
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         u_diff.values[::quiver_strides,::quiver_strides],
-         v_diff.values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              u_diff.values[::quiver_strides, ::quiver_strides],
+              v_diff.values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 1, r'$1\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('500 hPa wind vectors and geopotential height anomalies', fontsize=14);
+ax.set_title('500 hPa wind vectors and geopotential height anomalies', fontsize=14)
 
 plt.show()
 fig.savefig("figure16.png", dpi=300)
@@ -643,53 +641,53 @@ x = air.lon
 y = air.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot temperature as filled contours
-air_ltm = air['air'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
+air_ltm = air['air'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
 air_ext = extremes_tavg['air'] - 273.15
 air_diff = air_ext['air'] - air_ltm
 
 data = air_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4,5,1), transform=ccrs.PlateCarree(), cmap='coolwarm', alpha=0.7);
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4, 5, 1), transform=ccrs.PlateCarree(), cmap='coolwarm', alpha=0.7)
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.005, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot specific humidity as contours
-shum_ltm = shum['shum'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
+shum_ltm = shum['shum'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
 shum_ext = extremes_tavg['shum'] * 1000.
 shum_diff = shum_ext['shum'] - shum_ltm
 
 data = shum_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
 # Option 1: plot colorbar for contour
-cs = ax.contour(x_cyc, y, data_cyc, np.arange(-1.6,1.7,0.4), transform=ccrs.PlateCarree(), linewidths=1.5, cmap='seismic', alpha=1);
+cs = ax.contour(x_cyc, y, data_cyc, np.arange(-1.6, 1.7, 0.4), transform=ccrs.PlateCarree(), linewidths=1.5, cmap='seismic', alpha=1)
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('850 hPa specific humidity (g/kg)', size=12, rotation=-90, verticalalignment='bottom')
 # Option 2: label the number on the contour
-# cs = ax.contour(x, y, data, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds');
+# cs = ax.contour(x, y, data, transform=ccrs.PlateCarree(), linewidths=1.5, cmap='Reds')
 # ax.clabel(cs, inline=1, fmt='%2.1f', fontsize=14)
 
 # Plot wind barbs, but not all of them
-u850_ltm = uwnd['uwnd'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
-v850_ltm = vwnd['vwnd'].sel(level=850.).isel(time=[9,10,11]).mean(dim='time')
+u850_ltm = uwnd['uwnd'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
+v850_ltm = vwnd['vwnd'].sel(level=850.).isel(time=[9, 10, 11]).mean(dim='time')
 u850_ext = extremes_tavg['uwnd'].sel(level=850.)
 v850_ext = extremes_tavg['vwnd'].sel(level=850.)
 u_diff = u850_ext['uwnd'] - u850_ltm
 v_diff = v850_ext['vwnd'] - v850_ltm
 
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         u_diff.values[::quiver_strides,::quiver_strides],
-         v_diff.values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              u_diff.values[::quiver_strides, ::quiver_strides],
+              v_diff.values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.75, 0.83, 1, r'$1\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('850 hPa temperature, specific humidity, and winds anomalies', fontsize=14);
+ax.set_title('850 hPa temperature, specific humidity, and winds anomalies', fontsize=14)
 
 plt.show()
 fig.savefig("figure17.png", dpi=300)
@@ -702,40 +700,40 @@ x = skt.lon
 y = skt.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot skin temperature as filled contours
-skt_ltm = skt['skt'].isel(time=[9,10,11]).mean(dim='time')
+skt_ltm = skt['skt'].isel(time=[9, 10, 11]).mean(dim='time')
 skt_ext = extremes_tavg['skt'] - 273.15
 skt_diff = skt_ext['skt'] - skt_ltm
 
 data = skt_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-8,9,2), transform=ccrs.PlateCarree(), cmap='coolwarm');
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-8, 9, 2), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('skin temperature (degC)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
 
 # Plot wind barbs, but not all of them
 # For uwnd_sig995, lat: 73, lon: 144
 x = uwnd_sig995.lon
 y = uwnd_sig995.lat
-usfc_ltm = uwnd_sig995['uwnd'].isel(time=[9,10,11]).mean(dim='time')
-vsfc_ltm = vwnd_sig995['vwnd'].isel(time=[9,10,11]).mean(dim='time')
+usfc_ltm = uwnd_sig995['uwnd'].isel(time=[9, 10, 11]).mean(dim='time')
+vsfc_ltm = vwnd_sig995['vwnd'].isel(time=[9, 10, 11]).mean(dim='time')
 usfc_ext = extremes_tavg['uwnd_sig995']
 vsfc_ext = extremes_tavg['vwnd_sig995']
 usfc_diff = usfc_ext['uwnd'] - usfc_ltm
 vsfc_diff = vsfc_ext['vwnd'] - vsfc_ltm
 
 quiver_strides = 4
-Q = ax.quiver(x[::quiver_strides], y[::quiver_strides], 
-         usfc_diff.values[::quiver_strides,::quiver_strides],
-         vsfc_diff.values[::quiver_strides,::quiver_strides])
+Q = ax.quiver(x[::quiver_strides], y[::quiver_strides],
+              usfc_diff.values[::quiver_strides, ::quiver_strides],
+              vsfc_diff.values[::quiver_strides, ::quiver_strides])
 qk = ax.quiverkey(Q, 0.8, 0.88, 1, r'$1\ \frac{m}{s}$', labelpos='E', coordinates='figure')
-ax.set_title('skin temperature, and surface wind vectors (sig995 level) anomalies', fontsize=14);
+ax.set_title('skin temperature, and surface wind vectors (sig995 level) anomalies', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -748,23 +746,23 @@ x = pr_wtr.lon
 y = pr_wtr.lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-pr_wtr_ltm = pr_wtr['pr_wtr'].isel(time=[9,10,11]).mean(dim='time')
+pr_wtr_ltm = pr_wtr['pr_wtr'].isel(time=[9, 10, 11]).mean(dim='time')
 pr_wtr_ext = extremes_tavg['pr_wtr']
 pr_wtr_diff = pr_wtr_ext['pr_wtr'] - pr_wtr_ltm
 
 data = pr_wtr_diff
 data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-6,7,1.5), transform=ccrs.PlateCarree(), cmap='coolwarm');
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-6, 7, 1.5), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('total atmospheric column water vapor (kg/$m^2$)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('total atmospheric column water vapor anomalies', fontsize=14);
+ax.set_title('total atmospheric column water vapor anomalies', fontsize=14)
 
 plt.show()
 fig.savefig("figure19.png", dpi=300)
@@ -776,23 +774,23 @@ x = extremes_tavg['prate'].lon
 y = extremes_tavg['prate'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-prate_ltm = prate['prate'].isel(time=[9,10,11]).mean(dim='time')
+prate_ltm = prate['prate'].isel(time=[9, 10, 11]).mean(dim='time')
 prate_ext = extremes_tavg['prate']
 prate_diff = prate_ext['prate'] - prate_ltm
 
-data = prate_diff * 86400 # kg/m^2/s to mm/day
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4,5,1), transform=ccrs.PlateCarree(), cmap='coolwarm');
+data = prate_diff * 86400  # kg/m^2/s to mm/day
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-4, 5, 1), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('precipitation rate (mm/day)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('precipitation rate anomalies', fontsize=14);
+ax.set_title('precipitation rate anomalies', fontsize=14)
 ax.set_ylim(-88.542, 88.542)
 
 plt.show()
@@ -805,24 +803,23 @@ x = extremes_tavg['omega'].lon
 y = extremes_tavg['omega'].lat
 
 # Create the matplotlib figure and axis
-fig = plt.figure(figsize=(20,8.5))
+fig = plt.figure(figsize=(20, 8.5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 # Plot total atmospheric column water vapor as filled contours
-omega_ltm = omega['omega'].sel(level=500.).isel(time=[9,10,11]).mean(dim='time')
+omega_ltm = omega['omega'].sel(level=500.).isel(time=[9, 10, 11]).mean(dim='time')
 omega_ext = extremes_tavg['omega']
 omega_diff = omega_ext['omega'] - omega_ltm
 
 data = omega_diff
-data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x) # Add cyclic point
-cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-0.04,0.05,0.01), transform=ccrs.PlateCarree(), cmap='coolwarm');
+data_cyc, x_cyc = cutil.add_cyclic_point(data, coord=x)  # Add cyclic point
+cs = ax.contourf(x_cyc, y, data_cyc, np.arange(-0.04, 0.05, 0.01), transform=ccrs.PlateCarree(), cmap='coolwarm')
 cax, kw = matplotlib.colorbar.make_axes(ax, location='right', pad=0.05, shrink=0.8)
 out = fig.colorbar(cs, cax=cax, extend='both')
 label = out.set_label('omega (Pa/s)', size=12, rotation=-90, verticalalignment='bottom')
-ax.set_global() 
+ax.set_global()
 ax.coastlines()
-ax.set_title('500 hPa omega anomalies', fontsize=14);
+ax.set_title('500 hPa omega anomalies', fontsize=14)
 
 plt.show()
 fig.savefig("figure21.png", dpi=300)
-
